@@ -14,7 +14,4 @@ class UserProductRate extends Model
 
     protected $guarded = [];
 
-
-
-
 }
