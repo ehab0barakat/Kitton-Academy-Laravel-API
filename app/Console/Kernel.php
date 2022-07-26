@@ -21,8 +21,18 @@ class Kernel extends ConsoleKernel
     /**
      * Register the commands for the application.
      *
+     *
+     *
      * @return void
      */
+
+    protected $middleware = [
+        \Fruitcake\Cors\HandleCors::class,
+        \App\Http\Middleware\Cors::class,
+      ];
+
+
+
     protected function commands()
     {
         $this->load(__DIR__.'/Commands');

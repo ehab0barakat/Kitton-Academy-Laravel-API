@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string("location");
             $table->boolean('isActive')->default(false);
             $table->date("date");
-            $table->date("time");
+            $table->time("time");
             $table->string("image");
             $table->string("description");
             $table->unsignedBigInteger("teacher_id");
