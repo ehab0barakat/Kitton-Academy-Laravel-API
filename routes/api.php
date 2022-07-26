@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+// route::apiResource("event","App\Http\Controllers\API\EventController")->middleware("auth:sanctum");
+
+
+route::apiResource("event","App\Http\Controllers\API\EventController");
+route::apiResource("eventcats","App\Http\Controllers\API\EventCatsController");
