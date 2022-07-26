@@ -9,6 +9,8 @@ class EventCategory extends Model
 {
     use HasFactory;
 
+    // protected $primaryKey = 'id';
+
     protected $table = 'event_cats';
     protected $guarded = [];
 
