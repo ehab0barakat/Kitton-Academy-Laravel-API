@@ -28,6 +28,7 @@ route::apiResource("event","App\Http\Controllers\API\EventController")->middlewa
 
 route::apiResource("eventcats","App\Http\Controllers\API\EventCatsController");
 
+route::apiResource("classes","App\Http\Controllers\API\ClassController");
 
 
 
@@ -52,3 +53,4 @@ Route::group([
     Route::post('signupteacher',['\App\Http\Controllers\Auth\AuthController',"signupteacher"]);
 });
 
+route::apiResource("classescats","App\Http\Controllers\API\ClassCatsController");
