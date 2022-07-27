@@ -23,8 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // route::apiResource("event","App\Http\Controllers\API\EventController")->middleware("auth:sanctum");
 
 
-// route::apiResource("event","App\Http\Controllers\API\EventController")->middleware("auth:sanctum");
-route::apiResource("event","App\Http\Controllers\API\EventController");
+route::apiResource("event","App\Http\Controllers\API\EventController")->middleware("auth:sanctum");
+// route::apiResource("event","App\Http\Controllers\API\EventController");
 
 route::apiResource("eventcats","App\Http\Controllers\API\EventCatsController");
 

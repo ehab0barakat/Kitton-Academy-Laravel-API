@@ -16,9 +16,9 @@ class EventController extends Controller
      */
     public function index()
     {
-        // if(Auth::user()){
+        if(Auth::user()){
            return  Event::all() ;
-        // }
+        }
     }
 
     /**
