@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Auth ;
 
 class EventController extends Controller
 {
@@ -15,7 +16,9 @@ class EventController extends Controller
      */
     public function index()
     {
-        return  Event::all() ;
+        // if(Auth::user()){
+           return  Event::all() ;
+        // }
     }
 
     /**
@@ -26,7 +29,8 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        return Event::create($request->all())->save() ;
+        
+            return Event::create($request->all())->save() ;
     }
 
     /**
