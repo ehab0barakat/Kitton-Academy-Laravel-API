@@ -26,7 +26,9 @@ return new class extends Migration
             $table->string("image");
             $table->string("description");
             $table->unsignedBigInteger("teacher_id");
+            $table->unsignedBigInteger("classCat_id");
 
+            $table->foreign('classCat_id')->references('id')->on('class_cats');
             $table->foreign('teacher_id')->references('id')->on('teachers');
 
             $table->timestamps();
