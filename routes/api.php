@@ -24,3 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 route::apiResource("event","App\Http\Controllers\API\EventController");
 route::apiResource("eventcats","App\Http\Controllers\API\EventCatsController");
+route::apiResource("post","App\Http\Controllers\API\PostController");
+
+// route::post('file','App\Http\Controllers\API\PostController');
