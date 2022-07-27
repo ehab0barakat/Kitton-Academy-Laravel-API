@@ -26,4 +26,6 @@ route::apiResource("event","App\Http\Controllers\API\EventController");
 
 route::apiResource("eventcats","App\Http\Controllers\API\EventCatsController");
 
+route::apiResource("classes","App\Http\Controllers\API\ClassController");
 
+route::apiResource("classescats","App\Http\Controllers\API\ClassCatsController");
