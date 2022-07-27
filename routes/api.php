@@ -29,6 +29,8 @@ route::apiResource("event","App\Http\Controllers\API\EventController");
 route::apiResource("eventcats","App\Http\Controllers\API\EventCatsController");
 
 route::apiResource("post","App\Http\Controllers\API\PostController");
+route::apiResource("comment","App\Http\Controllers\API\UserPostCommentController");
+
 
 // route::post('file','App\Http\Controllers\API\PostController');
 
