@@ -29,7 +29,7 @@ class ClassController extends Controller
     {
 
         return Cllass::create($request->all())->save() ;
-        // return $request;
+        
     }
 
     /**
@@ -38,9 +38,10 @@ class ClassController extends Controller
      * @param  \App\Models\Cllass  $cllass
      * @return \Illuminate\Http\Response
      */
-    public function show(Cllass $cllass)
+    public function show(Cllass $cllass,$id)
     {
-        return $cllass;
+
+        return Cllass::find($id);
     }
 
     /**
@@ -50,10 +51,14 @@ class ClassController extends Controller
      * @param  \App\Models\Cllass  $cllass
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cllass $cllass)
+    public function update(Request $request, Cllass $cllass,$id)
     {
-        return $cllass->update($request->all());
-        // return $request;
+
+        return Cllass::find($id)->update($request->all());
+
+
+
+
     }
 
     /**
@@ -62,8 +67,8 @@ class ClassController extends Controller
      * @param  \App\Models\Cllass  $cllass
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cllass $cllass)
+    public function destroy(Cllass $cllass,$id)
     {
-        return $cllass->delete();
+        return Cllass::find($id)->delete();
     }
 }
