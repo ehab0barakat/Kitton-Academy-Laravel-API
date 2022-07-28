@@ -17,13 +17,16 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+// 
 
+route::apiResource("Product","App\Http\Controllers\API\ProductController");
+route::apiResource("ProductsCategory","App\Http\Controllers\API\CategoriesController");
 
-// route::apiResource("event","App\Http\Controllers\API\EventController")->middleware("auth:sanctum");
-
+// --------------------------------------------------------------------------------//
 
 route::apiResource("event","App\Http\Controllers\API\EventController");
-
 route::apiResource("eventcats","App\Http\Controllers\API\EventCatsController");
+
+// route::apiResource("event","App\Http\Controllers\API\EventController")->middleware("auth:sanctum");
 
 
