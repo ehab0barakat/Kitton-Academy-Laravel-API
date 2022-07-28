@@ -9,6 +9,12 @@ use Auth ;
 
 class EventController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum', ['except' => ['index' , "show"]]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,9 +22,9 @@ class EventController extends Controller
      */
     public function index()
     {
-        if(Auth::user()){
+        // if(Auth::user()){
            return  Event::all() ;
-        }
+        // }
     }
 
     /**
@@ -53,7 +59,6 @@ class EventController extends Controller
     public function update(Request $request, Event $event)
     {
         return $event->update($request->all());
-        // return $request ;
     }
 
     /**

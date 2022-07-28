@@ -33,6 +33,7 @@ return [
     |
     */
 
+    'prefix' => "api" ,
     'guard' => ['web'],
 
     /*

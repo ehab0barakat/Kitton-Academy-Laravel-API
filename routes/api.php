@@ -20,20 +20,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-// route::apiResource("event","App\Http\Controllers\API\EventController")->middleware("auth:sanctum");
 
-
-route::apiResource("event","App\Http\Controllers\API\EventController")->middleware("auth:sanctum");
-// route::apiResource("event","App\Http\Controllers\API\EventController");
+route::apiResource("event","App\Http\Controllers\API\EventController");
 
 route::apiResource("eventcats","App\Http\Controllers\API\EventCatsController");
 
 route::apiResource("classes","App\Http\Controllers\API\ClassController");
-
-
-
-// route::apiResource("auth","App\Http\Controllers\Auth\AuthController");
-
 
 Route::group([
 
@@ -46,8 +38,7 @@ Route::group([
     Route::post('logout',['\App\Http\Controllers\Auth\AuthController',"logout"]);
 
     Route::post('refresh',['\App\Http\Controllers\Auth\AuthController',"refresh"]);
-    Route::post('me',['\App\Http\Controllers\Auth\AuthController',"me"]);
-
+    Route::get('me',['\App\Http\Controllers\Auth\AuthController',"me"]);
 
     Route::post('signupuser',['\App\Http\Controllers\Auth\AuthController',"signupuser"]);
     Route::post('signupteacher',['\App\Http\Controllers\Auth\AuthController',"signupteacher"]);
