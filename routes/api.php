@@ -22,6 +22,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 route::apiResource("event","App\Http\Controllers\API\EventController");
+Route::post('event/teacher',['\App\Http\Controllers\API\EventController',"events-for-target-teacher"]);
+Route::post('event/notactive',['\App\Http\Controllers\API\EventController',"events-isnotactive"]);
+Route::post('event/for-users',['\App\Http\Controllers\API\EventController',"events-for-users"]);
+
+
+
+
+
 
 route::apiResource("eventcats","App\Http\Controllers\API\EventCatsController");
 
@@ -45,3 +53,5 @@ Route::group([
 });
 
 route::apiResource("classescats","App\Http\Controllers\API\ClassCatsController");
+
+Route::get('eventcat/{id}',['\App\Http\Controllers\API\EventCatsController',"eventcat"]);

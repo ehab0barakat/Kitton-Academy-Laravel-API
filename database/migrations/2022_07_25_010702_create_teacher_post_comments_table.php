@@ -18,8 +18,8 @@ return new class extends Migration
 
             $table->unsignedBigInteger("teacher_id");
             $table->unsignedBigInteger("post_id");
-            $table->foreign('teacher_id')->references('id')->on('teachers');
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->text("comment");
 
 

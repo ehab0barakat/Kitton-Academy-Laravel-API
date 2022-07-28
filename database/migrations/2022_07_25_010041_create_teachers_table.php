@@ -23,7 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('balance')->nullable();
             $table->string('image')->nullable();
             $table->boolean('isActive')->default(false);
-            $table->unsignedBigInteger('role')->nullable();
+            $table->unsignedBigInteger('role')->default(2);
             $table->float('rate')->nullable();
             $table->timestamps();
         });
