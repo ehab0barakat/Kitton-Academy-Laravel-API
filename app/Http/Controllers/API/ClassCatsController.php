@@ -1,30 +1,21 @@
 <?php
 
 namespace App\Http\Controllers\API;
-
 use App\Http\Controllers\Controller;
-use App\Models\Event;
+use App\Models\ClassCat;
+use App\Models\Cllass;
 use Illuminate\Http\Request;
-use Auth ;
 
-class EventController extends Controller
+class ClassCatsController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth:sanctum', ['except' => ['index' , "show"]]);
-    }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */  
+     */
     public function index()
     {
-        // if(Auth::user()){
-           return  Event::all() ;
-        // }
+        return  ClassCat::all() ;
     }
 
     /**
@@ -35,40 +26,46 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-            return Event::create($request->all())->save() ;
+        return ClassCat::create($request->all())->save() ;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\ClassCat  $classCat
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show(ClassCat $classCat, $id)
     {
-        return $event ;
+        // return $classCat;
+        return ClassCat::find($id);
+        // return Cllass::where("classCat_id" , $id )->get() ;
+
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\ClassCat  $classCat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Event $event)
+    public function update(Request $request, ClassCat $classCat,$id)
     {
-        return $event->update($request->all());
+   return ClassCat::find($id)->update($request->all());
+
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\ClassCat  $classCat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Event $event)
+    public function destroy(ClassCat $classCat,$id)
     {
-        return $event->delete();
+        return ClassCat::find($id)->delete();
     }
 }

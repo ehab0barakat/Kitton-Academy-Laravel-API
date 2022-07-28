@@ -3,28 +3,20 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Event;
+use App\Models\Cllass;
 use Illuminate\Http\Request;
-use Auth ;
+use Psy\Readline\Hoa\Console;
 
-class EventController extends Controller
+class ClassController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth:sanctum', ['except' => ['index' , "show"]]);
-    }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */  
+     */
     public function index()
     {
-        // if(Auth::user()){
-           return  Event::all() ;
-        // }
+        return  Cllass::all() ;
     }
 
     /**
@@ -35,40 +27,48 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-            return Event::create($request->all())->save() ;
+
+        return Cllass::create($request->all())->save() ;
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\Cllass  $cllass
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show(Cllass $cllass,$id)
     {
-        return $event ;
+
+        return Cllass::find($id);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\Cllass  $cllass
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Event $event)
+    public function update(Request $request, Cllass $cllass,$id)
     {
-        return $event->update($request->all());
+
+        return Cllass::find($id)->update($request->all());
+
+
+
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Event  $event
+     * @param  \App\Models\Cllass  $cllass
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Event $event)
+    public function destroy(Cllass $cllass,$id)
     {
-        return $event->delete();
+        return Cllass::find($id)->delete();
     }
 }
