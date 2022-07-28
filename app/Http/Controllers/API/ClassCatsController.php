@@ -26,7 +26,7 @@ class ClassCatsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return ClassCat::create($request->all())->save() ;
     }
 
     /**
@@ -37,7 +37,11 @@ class ClassCatsController extends Controller
      */
     public function show(ClassCat $classCat, $id)
     {
-        return Cllass::where("classCat_id" , $id )->get() ;
+        // return $classCat;
+        return ClassCat::find($id);
+        // return Cllass::where("classCat_id" , $id )->get() ;
+
+
     }
 
     /**
@@ -47,9 +51,11 @@ class ClassCatsController extends Controller
      * @param  \App\Models\ClassCat  $classCat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ClassCat $classCat)
+    public function update(Request $request, ClassCat $classCat,$id)
     {
-        //
+   return ClassCat::find($id)->update($request->all());
+
+
     }
 
     /**
@@ -58,8 +64,8 @@ class ClassCatsController extends Controller
      * @param  \App\Models\ClassCat  $classCat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ClassCat $classCat)
+    public function destroy(ClassCat $classCat,$id)
     {
-        //
+        return ClassCat::find($id)->delete();
     }
 }
