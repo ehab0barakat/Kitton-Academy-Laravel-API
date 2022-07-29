@@ -22,14 +22,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-// route::apiResource("event","App\Http\Controllers\API\EventController")->middleware("auth:sanctum");
 
-
-// route::apiResource("event","App\Http\Controllers\API\EventController")->middleware("auth:sanctum");
 route::apiResource("event","App\Http\Controllers\API\EventController");
+Route::post('event/teacher',['\App\Http\Controllers\API\EventController',"events-for-target-teacher"]);
+Route::post('event/notactive',['\App\Http\Controllers\API\EventController',"events-isnotactive"]);
+Route::post('event/for-users',['\App\Http\Controllers\API\EventController',"events-for-users"]);
+
+
+
+
+
 
 route::apiResource("eventcats","App\Http\Controllers\API\EventCatsController");
 
+<<<<<<< HEAD
 route::apiResource("post","App\Http\Controllers\API\PostController");
 route::apiResource("comment","App\Http\Controllers\API\UserPostCommentController");
 
@@ -41,6 +47,9 @@ route::apiResource("comment","App\Http\Controllers\API\UserPostCommentController
 
 // route::apiResource("auth","App\Http\Controllers\Auth\AuthController");
 
+=======
+route::apiResource("classes","App\Http\Controllers\API\ClassController");
+>>>>>>> fa2a47d15bc79086c3d8f0021e0cbf66517af39d
 
 Route::group([
 
@@ -53,11 +62,16 @@ Route::group([
     Route::post('logout',['\App\Http\Controllers\Auth\AuthController',"logout"]);
 
     Route::post('refresh',['\App\Http\Controllers\Auth\AuthController',"refresh"]);
-    Route::post('me',['\App\Http\Controllers\Auth\AuthController',"me"]);
-
+    Route::get('me',['\App\Http\Controllers\Auth\AuthController',"me"]);
 
     Route::post('signupuser',['\App\Http\Controllers\Auth\AuthController',"signupuser"]);
     Route::post('signupteacher',['\App\Http\Controllers\Auth\AuthController',"signupteacher"]);
 });
 
+<<<<<<< HEAD
 
+=======
+route::apiResource("classescats","App\Http\Controllers\API\ClassCatsController");
+
+Route::get('eventcat/{id}',['\App\Http\Controllers\API\EventCatsController',"eventcat"]);
+>>>>>>> fa2a47d15bc79086c3d8f0021e0cbf66517af39d

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\NormalUser;
 use App\Models\Teacher;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -40,11 +41,6 @@ class AuthController extends Controller
     }
 
 
-
-
-
-
-
     public function signupuser(Request $request)
     {
 
@@ -55,12 +51,15 @@ class AuthController extends Controller
                "name" => $request->ParentName ,
                "email" => $request->email ,
                "password" => Hash::make($request->password),
-               "role" => 1
+               "role" => "1"
            ])->save();
             NormalUser::create($request->all())->save();
             return [ "message" =>"redirecting to homepage :) "] ;
         }
     }
+
+
+
 
     public function signupteacher(Request $request)
     {
@@ -71,7 +70,7 @@ class AuthController extends Controller
                "name" => $request->name ,
                "email" => $request->email,
                "password" => Hash::make($request->password),
-               "role"=> 2
+               "role"=> "2"
            ])->save();
             Teacher::create($request->all())->save();
             return [ "message" =>"redirecting to homepage :)"] ;
@@ -87,9 +86,26 @@ class AuthController extends Controller
      */
     public function me()
     {
-        // return "ehab" ;
-        return response()->json(auth()->user());
+
+        $role =  auth()->user()->role ;
+        $email = auth()->user()->email ;
+
+        if($role == 1){
+            return User::where("email",$email)->first();
+        }elseif($role == 2){
+            return Teacher::where("email",$email)->first();
+        }elseif($role == 3){
+            return Admin::where("email",$email)->first();
+        }else{
+            return ["name","guest" ,
+                    "role" , "0"] ;
+        }
+
+
     }
+
+
+
 
     /**
      * Log the user out (Invalidate the token).
