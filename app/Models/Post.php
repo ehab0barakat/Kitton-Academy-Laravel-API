@@ -16,7 +16,7 @@ class Post extends Model
     // one to many relation bet post and comments
 
     public function comments(){
-   return $this->hasMany(UserPostComment::class)->whereNull('teacher_id');
+   return $this->hasMany(UserPostComment::class);
 
 
     } 

@@ -15,9 +15,17 @@ class PostController extends Controller
     //      $completeFileName=$request->file('image')->getClientOriginalName();
     //       $fileNameOnly=pathinfo($completeFileName,PATHINFO_FILENAME);
     //       $extenshion=$request->file('image')->getClientOriginalExtension();
-    //       $compPic=str_replace(' ','_',$fileNameOnly).'-'.rand().'_' .time().'.'.$extenshion ; 
-    //       $path=$request->file('image')->storeAs();
-        
+    //       $compPic=str_replace(' ','_',$fileNameOnly).'-'.rand().'_' .time().'.'.$extenshion; 
+    //       $path=$request->file('image')->storeAs('public/posts','$compPic');
+    //     $post->image=$compPic;
+    //     }
+    //     if ($post->save()){
+
+    //         return ['status'=>true,'message'=>'post saved successfully'];
+    //     }
+    //     else {
+    //         return ['status'=>false,'message'=>'post not saved '];
+
     //     }
 
     // }

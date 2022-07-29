@@ -18,7 +18,7 @@ class UserPostCommentController extends Controller
      */
     public function index()
     {
-        //
+        return UserPostComment::all();
     }
 
     /**
@@ -30,7 +30,10 @@ class UserPostCommentController extends Controller
     public function store(Request $request, Post $id) 
     {
         $input = $request->all();
+        
       return  UserPostComment::create($input)->save();
+//    return($request);
+
     }
     
 
@@ -40,9 +43,9 @@ class UserPostCommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(UserPostComment $comment)
     {
-        //
+        return $comment;
     }
 
     /**
@@ -52,9 +55,9 @@ class UserPostCommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, UserPostComment $comment)
     {
-        //
+        return $comment->update($request->all());
     }
 
     /**
@@ -63,8 +66,8 @@ class UserPostCommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(UserPostComment $comment)
     {
-        //
+        return $comment->delete();
     }
 }

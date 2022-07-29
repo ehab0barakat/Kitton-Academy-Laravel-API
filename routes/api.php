@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\PostController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +34,7 @@ route::apiResource("post","App\Http\Controllers\API\PostController");
 route::apiResource("comment","App\Http\Controllers\API\UserPostCommentController");
 
 
-// route::post('file','App\Http\Controllers\API\PostController');
+// route::post('file','PostController@file');
 
 
 
