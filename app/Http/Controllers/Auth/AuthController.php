@@ -91,7 +91,7 @@ class AuthController extends Controller
         $email = auth()->user()->email ;
 
         if($role == 1){
-            return User::where("email",$email)->first();
+            return NormalUser::where("email",$email)->first();
         }elseif($role == 2){
             return Teacher::where("email",$email)->first();
         }elseif($role == 3){

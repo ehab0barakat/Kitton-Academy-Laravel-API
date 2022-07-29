@@ -47,7 +47,9 @@ class EventCatsController extends Controller
      */
     public function show(EventCategory $eventCategory , $id)
     {
-        return Event::where("eventCat_id", $id )->get() ;
+        return Event::where("eventCat_id", $id )
+                    ->where("isActive", 1 )
+                    ->get() ;
     }
 
     public function eventcat(EventCategory $eventCategory , $id)
