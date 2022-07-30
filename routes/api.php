@@ -45,3 +45,4 @@ Route::group([
 });
 
 route::apiResource("classescats","App\Http\Controllers\API\ClassCatsController");
+route::apiResource("myClasses","App\Http\Controllers\API\MyClassController");

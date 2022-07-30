@@ -11,4 +11,8 @@ class Cllass extends Model
 
     protected $table = 'classes';
     protected $guarded = [];
+    
+    public function myClass(){
+        return $this->hasMany(myClass::class);
+    }
 }

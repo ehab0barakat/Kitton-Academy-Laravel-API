@@ -12,6 +12,9 @@ class NormalUser extends Model
     protected $table = 'normal_users';
 
     protected $guarded = [];
-
+    
+    public function myClass(){
+        return $this->hasMany(myClass::class);
+    }
 
 }
