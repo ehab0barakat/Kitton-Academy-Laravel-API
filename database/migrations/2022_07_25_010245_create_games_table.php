@@ -21,7 +21,7 @@ return new class extends Migration
             $table->boolean('isActive')->default(false);
             $table->string("description");
             $table->unsignedBigInteger("gameCat_id");
-            $table->foreign('gameCat_id')->references('id')->on('game_cats');
+            $table->foreign('gameCat_id')->references('id')->on('game_cats')->onDelete('cascade');
 
 
             $table->timestamps();

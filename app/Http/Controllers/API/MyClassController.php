@@ -19,9 +19,10 @@ class MyClassController extends Controller
      */
     public function index()
     {
-        
-        return Cllass::all()->where("user_id" , NormalUser::user()->id);
-    }
+//
+}
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -31,7 +32,29 @@ class MyClassController extends Controller
      */
     public function store(Request $request)
     {
+        {
 
+            $fields = array();
+            foreach ($request->all() as $key => $value) {
+                $fields[$key] = $value;
+            }
+            try {
+
+                $data = myClass::insertGetId($fields);
+                $data = myClass::find($data);
+
+                $response = array(
+                    'data' => $data,
+                );
+                return response()->json($response);
+            } catch (\Exception $e) {
+                $response = array(
+                    'status' => 'fail',
+                    'error' => $e->getMessage()
+                );
+                return response()->json($response, 400);
+            }
+        }
 
     }
 
@@ -41,9 +64,10 @@ class MyClassController extends Controller
      * @param  \App\Models\myClass  $myClass
      * @return \Illuminate\Http\Response
      */
-    public function show(myClass $myClass)
+    public function show( myClass $myClass, $id)
     {
-        //
+
+     return Cllass::rightJoin('myclass', 'myclass.class_id', '=', 'classes.id')->select('classes.*')->get();
     }
 
     /**

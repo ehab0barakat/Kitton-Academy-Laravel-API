@@ -91,7 +91,7 @@ class AuthController extends Controller
         $email = auth()->user()->email ;
 
         if($role == 1){
-            return User::where("email",$email)->first();
+            return NormalUser::where("email",$email)->first();
         }elseif($role == 2){
             return Teacher::where("email",$email)->first();
         }elseif($role == 3){
@@ -126,7 +126,7 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        // return $this->respondWithToken(auth()->refresh());
     }
 
     /**
@@ -141,7 +141,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            // 'expires_in' => auth()->factory()->getTTL() * 60
         ]);
     }
 }

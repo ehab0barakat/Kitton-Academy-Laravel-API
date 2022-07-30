@@ -25,7 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('childAge')->nullable();
             $table->string('childGender')->nullable();
             $table->string('childImage')->nullable();
-            $table->unsignedBigInteger('role')->nullable();
+            $table->unsignedBigInteger('role')->default(1);
             $table->timestamps();
         });
     }

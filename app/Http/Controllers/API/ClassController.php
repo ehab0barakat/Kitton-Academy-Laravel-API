@@ -29,7 +29,7 @@ class ClassController extends Controller
     {
 
         return Cllass::create($request->all())->save() ;
-        
+
     }
 
     /**
@@ -71,4 +71,6 @@ class ClassController extends Controller
     {
         return Cllass::find($id)->delete();
     }
+
+    
 }

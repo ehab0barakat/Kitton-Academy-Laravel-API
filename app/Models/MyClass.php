@@ -18,7 +18,7 @@ class myClass extends Model
     ];
     public function class()
     {
-        return $this->belongsTo(Cllass::class);
+        return $this->belongsTo(Cllass::class,'class_id');
     }
 
     public function user()

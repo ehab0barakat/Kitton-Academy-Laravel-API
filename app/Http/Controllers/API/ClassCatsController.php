@@ -37,11 +37,15 @@ class ClassCatsController extends Controller
      */
     public function show(ClassCat $classCat, $id)
     {
-        // return $classCat;
-        return ClassCat::find($id);
-        // return Cllass::where("classCat_id" , $id )->get() ;
+
+        return Cllass::where("classCat_id", $id)->get() ;
 
 
+
+    }
+    public function classcat(ClassCat $classCat, $id)
+    {
+        return  ClassCat::find($id) ;
     }
 
     /**
@@ -68,4 +72,5 @@ class ClassCatsController extends Controller
     {
         return ClassCat::find($id)->delete();
     }
+   
 }

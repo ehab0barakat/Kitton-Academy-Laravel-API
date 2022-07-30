@@ -28,8 +28,8 @@ return new class extends Migration
             $table->unsignedBigInteger("teacher_id");
             $table->unsignedBigInteger("classCat_id");
 
-            $table->foreign('classCat_id')->references('id')->on('class_cats');
-            $table->foreign('teacher_id')->references('id')->on('teachers');
+            $table->foreign('classCat_id')->references('id')->on('class_cats')->onDelete('cascade');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
 
             $table->timestamps();
         });
