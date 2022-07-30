@@ -44,10 +44,6 @@ route::apiResource("normaluser","App\Http\Controllers\API\NormalUserController")
 
 
 
-
-
-
-
 route::apiResource("eventcats","App\Http\Controllers\API\EventCatsController");
 
 
