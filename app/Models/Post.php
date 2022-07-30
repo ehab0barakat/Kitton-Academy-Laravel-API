@@ -10,8 +10,8 @@ class Post extends Model
     use HasFactory;
 
     protected $table = 'posts';
-    protected $fillable=['title','description'];
-    // protected $guarded = [];
+    // protected $fillable=['title','description'];
+    protected $guarded = [];
 
     // one to many relation bet post and comments
 

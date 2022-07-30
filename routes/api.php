@@ -40,6 +40,8 @@ Route::get('event/teacherbyid/{id}',['\App\Http\Controllers\API\EventController'
 
 
 route::apiResource("event","App\Http\Controllers\API\EventController");
+route::apiResource("normaluser","App\Http\Controllers\API\NormalUserController");
+
 
 
 

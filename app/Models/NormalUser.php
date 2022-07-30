@@ -15,3 +15,4 @@ class NormalUser extends Model
 
 
 }
+    
