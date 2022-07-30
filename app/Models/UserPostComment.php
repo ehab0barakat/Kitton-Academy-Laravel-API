@@ -11,10 +11,14 @@ class UserPostComment extends Model
 
 
 
-    protected $table = 'user_post_comments';
+    // protected $table = 'user_post_comments';
+     protected $fillable=['user_id','post_id','teacher_id','comment'];
+    // protected $guarded = [];
 
-    protected $guarded = [];
-
-
+    public function post(){
+        return $this->BelongsTo(Post::class);
+     
+     
+         } 
 
 }
