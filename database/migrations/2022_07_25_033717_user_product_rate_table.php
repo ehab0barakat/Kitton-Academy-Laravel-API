@@ -18,8 +18,8 @@ return new class extends Migration
 
             $table->unsignedBigInteger("user_id");
             $table->unsignedBigInteger("product_id");
-            $table->foreign('user_id')->references('id')->on('normal_users');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('user_id')->references('id')->on('normal_users')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->unsignedBigInteger("rate");
 
 

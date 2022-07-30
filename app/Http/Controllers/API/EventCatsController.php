@@ -10,6 +10,14 @@ use App\Models\Event;
 
 class EventCatsController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum', ['except' => ['index' , "show" , "eventcat"]]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +36,7 @@ class EventCatsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return EventCategory::create($request->all())->save() ;
     }
 
     /**
@@ -39,9 +47,14 @@ class EventCatsController extends Controller
      */
     public function show(EventCategory $eventCategory , $id)
     {
-        // return  EventCategory::find($id) ;
-        return Event::where("eventCat_id", $id )->get() ;
-        // return Event::all() ;
+        return Event::where("eventCat_id", $id )
+                    ->where("isActive", 1 )
+                    ->get() ;
+    }
+
+    public function eventcat(EventCategory $eventCategory , $id)
+    {
+        return  EventCategory::find($id) ;
     }
 
     /**
@@ -51,9 +64,10 @@ class EventCatsController extends Controller
      * @param  \App\Models\EventCategory  $eventCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EventCategory $eventCategory)
+    public function update(Request $request, EventCategory $eventCategory , $id)
     {
-        //
+        return EventCategory::find($id)->update($request->all());
+
     }
 
     /**
@@ -62,8 +76,9 @@ class EventCatsController extends Controller
      * @param  \App\Models\EventCategory  $eventCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EventCategory $eventCategory)
+    public function destroy(EventCategory $eventCategory , $id)
     {
-        //
+        return EventCategory::find($id)->delete();
+
     }
 }
