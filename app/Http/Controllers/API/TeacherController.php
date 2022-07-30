@@ -14,9 +14,16 @@ class TeacherController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
-    }
+{
+   
+    $teachers = Teacher::all();
+
+    return response($teachers)
+        ->header('Access-Control-Allow-Origin','*')
+        ->header('Access-Control-Allow-Methods','GET, POST')
+        ->header('Access-Control-Allow-Headers','X-Requested-With');
+
+}
 
     /**
      * Store a newly created resource in storage.
@@ -35,9 +42,9 @@ class TeacherController extends Controller
      * @param  \App\Models\teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function show(teacher $teacher)
+    public function show($id)
     {
-        //
+        return teacher::find($id);
     }
 
     /**
