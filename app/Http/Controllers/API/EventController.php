@@ -14,7 +14,7 @@ class EventController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:sanctum', ['except' => ['events_active' , "show" , "certian_teacher"]]);
+        $this->middleware('auth:sanctum', ['except' => ['events_active'  , "certian_teacher"]]);
     }
 
     /**
@@ -22,11 +22,12 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // if(Auth::user()){
-           return  Event::all() ;
-        // }
+        if($request->user()->role == 3){
+            return  Event::all() ;
+        }
+
     }
 
     /**
@@ -46,9 +47,15 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show(Request $request ,Teacher $teacher , Event $event)
     {
-        return $event ;
+        if($request->user()->role == 3 ||
+           $event->isActive == 1 ||
+           Teacher::where("email", $request->user()->email)->first()->id == $event->teacher_id){
+             return $event ;
+        }else{
+            return ["id"=>0] ;
+        }
     }
 
     /**
@@ -73,7 +80,6 @@ class EventController extends Controller
     {
         return $event->delete();
     }
-
 
 
     public function events_nonactive(Event $event)
@@ -148,7 +154,9 @@ class EventController extends Controller
 
     public function change_state (Event $event , Request $request , $id)
     {
-        return   Event::find($id)->update(["isActive",$request->is_active])->save(); ;
+        if($request->user()->role == 3){
+            return   Event::find($id)->update(["isActive",$request->is_active])->save(); ;
+        }
     }
 
 
