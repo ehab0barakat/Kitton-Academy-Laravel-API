@@ -161,6 +161,20 @@ class EventController extends Controller
 
 
 
+    public function search_for_teacher_events (Event $event , Request $request )
+    {
+        if($request->user()->role == 3){
+            if(count(Teacher::where("email",$request->email)->get())  > 0){
+                return  Event::where("teacher_id",Teacher::where("email",$request->email)->first()->id)->get() ;
+            }else{
+                return  ["message" => "there is no teacher with that email"] ;
+            }
+
+        }
+    }
+
+
+
 
 
 
