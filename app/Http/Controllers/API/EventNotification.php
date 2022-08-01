@@ -33,10 +33,12 @@ class EventNotification extends Controller
     }
 
     public function show (Request $request ){
-        $teacher_id = Teacher::where("email",$request->user()->email)->first()->id ;
-        $check =TeacherEventNotification::where("teacher_id",$teacher_id)->get() ;
-        $array_of_ids =TeacherEventNotification::where("teacher_id",$teacher_id)->get() ;
-        $data = [] ;
+        if($request->user()->role == 2 ){
+
+            $teacher_id = Teacher::where("email",$request->user()->email)->first()->id ;
+            $check =TeacherEventNotification::where("teacher_id",$teacher_id)->get() ;
+            $array_of_ids =TeacherEventNotification::where("teacher_id",$teacher_id)->get() ;
+            $data = [] ;
         $count = 0 ;
         foreach ($check as $value) {
             if ($value->check == 0){
@@ -49,18 +51,13 @@ class EventNotification extends Controller
           }
 
         if( $request->user()->role == 2 ){
-                return ["data" =>   $data ,
+            return ["data" =>   $data ,
                         "check" =>   $check ,
                         "count" => $count
                        ];
         }
     }
-
-
-
-
-
-
+}
 
 
     public function update (Request $request , $id ){

@@ -54,7 +54,7 @@ class EventController extends Controller
            Teacher::where("email", $request->user()->email)->first()->id == $event->teacher_id){
              return $event ;
         }else{
-            return ["id"=>0] ;
+            return ["id" => 0 ] ;
         }
     }
 
