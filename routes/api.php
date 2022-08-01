@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\PostController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +40,8 @@ Route::get('event/teacherbyid/{id}',['\App\Http\Controllers\API\EventController'
 
 
 route::apiResource("event","App\Http\Controllers\API\EventController");
+route::apiResource("normaluser","App\Http\Controllers\API\NormalUserController");
+
 
 
 
@@ -45,6 +49,21 @@ route::apiResource("event","App\Http\Controllers\API\EventController");
 
 
 route::apiResource("eventcats","App\Http\Controllers\API\EventCatsController");
+
+
+route::apiResource("teacher","App\Http\Controllers\API\TeacherController");
+
+route::apiResource("post","App\Http\Controllers\API\PostController");
+route::apiResource("comment","App\Http\Controllers\API\UserPostCommentController");
+
+
+// route::post('file','PostController@file');
+
+
+
+
+// route::apiResource("auth","App\Http\Controllers\Auth\AuthController");
+
 
 route::apiResource("classes","App\Http\Controllers\API\ClassController");
 
@@ -66,8 +85,10 @@ Route::group([
     Route::post('signupteacher',['\App\Http\Controllers\Auth\AuthController',"signupteacher"]);
 });
 
+
 route::apiResource("classescats","App\Http\Controllers\API\ClassCatsController");
 Route::get('classcats/{id}',['\App\Http\Controllers\API\EventCatsController',"classcat"]);
+Route::get('classcats/{id}',['\App\Http\Controllers\API\EventCatsController',"classcat"]);
 route::apiResource("myclasses","App\Http\Controllers\API\MyClassController");
-
+Route::post('myclasses/rate',["App\Http\Controllers\API\MyClassController",'myClassRate']);
 Route::get('eventcat/{id}',['\App\Http\Controllers\API\EventCatsController',"eventcat"]);

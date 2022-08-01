@@ -15,6 +15,7 @@ class myClass extends Model
     protected $fillable = [
         'user_id',
         'class_id',
+        'rate',
     ];
     public function class()
     {

@@ -36,7 +36,6 @@ class AuthController extends Controller
         if (!$token = Auth::attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        // return $this->respondWithToken($token);
         return ["token" => request()->user()->createToken("api")->plainTextToken];
     }
 
@@ -57,8 +56,6 @@ class AuthController extends Controller
             return [ "message" =>"redirecting to homepage :) "] ;
         }
     }
-
-
 
 
     public function signupteacher(Request $request)

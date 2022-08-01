@@ -12,6 +12,10 @@ use Illuminate\Http\Request;
 
 class MyClassController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -67,7 +71,7 @@ class MyClassController extends Controller
     public function show( myClass $myClass, $id)
     {
 
-     return Cllass::rightJoin('myclass', 'myclass.class_id', '=', 'classes.id')->select('classes.*')->get();
+     return Cllass::rightJoin('myclass', 'myclass.class_id', '=', 'classes.id')->where('myclass.user_id','=',$id)->select('classes.*')->get();
     }
 
     /**
@@ -91,5 +95,16 @@ class MyClassController extends Controller
     public function destroy(myClass $myClass)
     {
         //
+    }
+    public function myClassRate(Request $request, myClass $myClass){
+        $checker = myClass::select('id')->where('user_id',$request->user()->id)->where('class_id', $request->class_id)->exists();
+        if ($checker == null){
+            return myClass::create(['user_id'=>$request->user()->id,'rate'=> $request->rate,
+        'class_id'=>$request->class_id]);
+        } else {
+    return myClass::where('user_id', $request->user()->id)
+                ->where('class_id', $request->class_id)
+                ->update(['rate' => $request->rate]);
+}
     }
 }
