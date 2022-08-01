@@ -13,18 +13,19 @@ class Post extends Model
     // protected $fillable=['title','description'];
     protected $guarded = [];
 
+
     // one to many relation bet post and comments
 
     public function comments(){
    return $this->hasMany(UserPostComment::class);
 
 
-    } 
-
+    }
 
     public function comment(){
         return $this->hasMany(TeacherPostComment::class);
-     
-     
-         } 
+
+
+         }
+
 }
