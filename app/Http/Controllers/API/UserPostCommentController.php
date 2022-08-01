@@ -57,7 +57,7 @@ class UserPostCommentController extends Controller
      */
     public function update(Request $request, UserPostComment $comment)
     {
-        return $comment->update($request->all());
+        // return $comment->update($request->all());
     }
 
     /**

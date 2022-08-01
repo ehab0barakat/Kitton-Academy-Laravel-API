@@ -4,10 +4,18 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\NormalUser;
+use App\Models\User;
+
 use Illuminate\Http\Request;
 
 class NormalUserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum', ['except' => []]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +23,7 @@ class NormalUserController extends Controller
      */
     public function index()
     {
-        //
+        return NormalUser::all();
     }
 
     /**
@@ -36,7 +44,7 @@ class NormalUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return NormalUser::create($request->all())->save();
     }
 
     /**
@@ -47,7 +55,7 @@ class NormalUserController extends Controller
      */
     public function show(NormalUser $normalUser)
     {
-        //
+        return $normalUser;
     }
 
     /**
@@ -68,9 +76,22 @@ class NormalUserController extends Controller
      * @param  \App\Models\NormalUser  $normalUser
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, NormalUser $normalUser)
+    public function update(Request $request, NormalUser $normalUser , User $User )
     {
-        return $normalUser->update($request->all());
+        // return $normalUser->update($request->all());
+        // return NormalUser::where("email",$request->email)->get() ;
+        return NormalUser::where("email",$request->user()->email)->update(["parentName"=>$request->parentName,
+                                                                            "address" =>$request->address ,
+                                                                            "balance"=>$request->balance ,
+                                                                            "childAge"=>$request->childAge ,
+                                                                            "childGender"=>$request->childGender ,
+                                                                            "childImage"=>$request->childImage ,
+                                                                            "childName"=>$request->childName ,
+                                                                            "email"=>$request->email ,
+                                                                            "parentName"=>$request->parentName ,
+                                                                            "password"=>$request->password ,
+                                                                            "phone"=>$request->phone
+                                                                                                         ]) ;
     }
 
     /**
@@ -81,6 +102,8 @@ class NormalUserController extends Controller
      */
     public function destroy(NormalUser $normalUser)
     {
-        //
+        return $normalUser->delete();
     }
 }
+
+

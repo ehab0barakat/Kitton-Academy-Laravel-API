@@ -54,7 +54,7 @@ class EventController extends Controller
            Teacher::where("email", $request->user()->email)->first()->id == $event->teacher_id){
              return $event ;
         }else{
-            return ["id"=>0] ;
+            return ["id" => 0 ] ;
         }
     }
 
@@ -156,6 +156,20 @@ class EventController extends Controller
     {
         if($request->user()->role == 3){
             return   Event::find($id)->update(["isActive",$request->is_active])->save(); ;
+        }
+    }
+
+
+
+    public function search_for_teacher_events (Event $event , Request $request )
+    {
+        if($request->user()->role == 3){
+            if(count(Teacher::where("email",$request->email)->get())  > 0){
+                return  Event::where("teacher_id",Teacher::where("email",$request->email)->first()->id)->get() ;
+            }else{
+                return  ["message" => "there is no teacher with that email"] ;
+            }
+
         }
     }
 

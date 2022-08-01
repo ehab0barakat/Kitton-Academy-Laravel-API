@@ -23,5 +23,15 @@ class Post extends Model
 
 
     } 
+<<<<<<< HEAD
 >>>>>>> 5b97b82106a9f4b501da4144965947dca0622ecd
+=======
+
+
+    public function comment(){
+        return $this->hasMany(TeacherPostComment::class);
+     
+     
+         } 
+>>>>>>> b99fee7f65dd3fea7fe660cdc6c63eec48634686
 }
