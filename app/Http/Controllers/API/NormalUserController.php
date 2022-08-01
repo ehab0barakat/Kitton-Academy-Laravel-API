@@ -105,3 +105,5 @@ class NormalUserController extends Controller
         return $normalUser->delete();
     }
 }
+
+
