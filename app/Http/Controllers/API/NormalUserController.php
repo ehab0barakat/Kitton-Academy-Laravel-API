@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\NormalUser;
+use App\Models\User;
+
 use Illuminate\Http\Request;
 
 class NormalUserController extends Controller
@@ -15,7 +17,7 @@ class NormalUserController extends Controller
      */
     public function index()
     {
-        //
+        return NormalUser::all();
     }
 
     /**
@@ -36,7 +38,7 @@ class NormalUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return NormalUser::create($request->all())->save();
     }
 
     /**
@@ -47,7 +49,7 @@ class NormalUserController extends Controller
      */
     public function show(NormalUser $normalUser)
     {
-        //
+        return $normalUser;
     }
 
     /**
@@ -68,9 +70,11 @@ class NormalUserController extends Controller
      * @param  \App\Models\NormalUser  $normalUser
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, NormalUser $normalUser)
+    public function update(Request $request, NormalUser $normalUser , User $User )
     {
-        return $normalUser->update($request->all());
+        // return $normalUser->update($request->all());
+        return $normalUser->where("email",$request->email)->update([$request->except(['created_at','updated_at'])]);
+   
     }
 
     /**
@@ -81,6 +85,6 @@ class NormalUserController extends Controller
      */
     public function destroy(NormalUser $normalUser)
     {
-        //
+        return $normalUser->delete();
     }
 }

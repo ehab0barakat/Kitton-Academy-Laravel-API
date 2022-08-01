@@ -10,19 +10,19 @@ class Teacher extends Model
     use HasFactory;
 
     protected $table = 'teachers';
+    protected $guarded = [];
 
-    protected $fillable = [
-        'id',
-        'ssid',
-        'email',
-        'address',
-        'phone',
-        'password',
-        'balance',
-        'image',
-        'isActive',
-        'role',
-        'rate',
+    // protected $fillable = [
+    //     'ssid',
+    //     'email',
+    //     'address',
+    //     'phone',
+    //     'password',
+    //     'balance',
+    //     'image',
+    //     'isActive',
+    //     'role',
+    //     'rate',
 
-    ];
+    // ];
 }

@@ -10,10 +10,16 @@ class TeacherPostComment extends Model
     use HasFactory;
 
 
-    protected $table = 'teachers';
+    protected $table = 'teacher_post_comments';
+    protected $fillable=['user_id','post_id','teacher_id','comment'];
 
-    protected $guarded = [];
 
 
+
+    public function post(){
+        return $this->BelongsTo(Post::class);
+     
+     
+         } 
 
 }

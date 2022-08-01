@@ -13,6 +13,6 @@ class NormalUser extends Model
 
     protected $guarded = [];
 
-
+   
 }
     
