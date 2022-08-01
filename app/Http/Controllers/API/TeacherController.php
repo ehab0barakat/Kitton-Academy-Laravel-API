@@ -15,7 +15,7 @@ class TeacherController extends Controller
      */
     public function index()
 {
-   
+
     $teachers = Teacher::all();
 
     return response($teachers)
@@ -56,9 +56,7 @@ class TeacherController extends Controller
      */
     public function update(Request $request, teacher $teacher)
     {
-        return $teacher->where("email",$request->email)->update($request->all());
-
-
+        return $teacher->where("email",$request->email)->update($request->except(["created_at","updated_at"]));
     }
 
     /**
