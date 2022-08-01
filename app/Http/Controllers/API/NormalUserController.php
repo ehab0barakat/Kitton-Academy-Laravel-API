@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class NormalUserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum', ['except' => []]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -73,8 +79,19 @@ class NormalUserController extends Controller
     public function update(Request $request, NormalUser $normalUser , User $User )
     {
         // return $normalUser->update($request->all());
-        return $normalUser->where("email",$request->email)->update([$request->except(['created_at','updated_at'])]);
-   
+        // return NormalUser::where("email",$request->email)->get() ;
+        return NormalUser::where("email",$request->user()->email)->update(["parentName"=>$request->parentName,
+                                                                            "address" =>$request->address ,
+                                                                            "balance"=>$request->balance ,
+                                                                            "childAge"=>$request->childAge ,
+                                                                            "childGender"=>$request->childGender ,
+                                                                            "childImage"=>$request->childImage ,
+                                                                            "childName"=>$request->childName ,
+                                                                            "email"=>$request->email ,
+                                                                            "parentName"=>$request->parentName ,
+                                                                            "password"=>$request->password ,
+                                                                            "phone"=>$request->phone
+                                                                                                         ]) ;
     }
 
     /**
