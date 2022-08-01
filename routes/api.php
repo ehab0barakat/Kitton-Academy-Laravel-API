@@ -52,6 +52,7 @@ route::apiResource("teacher","App\Http\Controllers\API\TeacherController");
 route::apiResource("post","App\Http\Controllers\API\PostController");
 route::apiResource("comment","App\Http\Controllers\API\UserPostCommentController");
 route::apiResource("teachercomment","App\Http\Controllers\API\TeacherPostCommentController");
+route::apiResource("likes","App\Http\Controllers\API\UserPostLikeController");
 
 
 

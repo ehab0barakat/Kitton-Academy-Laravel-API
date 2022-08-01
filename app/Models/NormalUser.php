@@ -11,7 +11,7 @@ class NormalUser extends Model
 
     protected $table = 'normal_users';
 
-    protected $guarded = [];
+    protected $guarded = ['created_at','updated_at'];
 
    
 }

@@ -73,6 +73,9 @@ class NormalUserController extends Controller
     public function update(Request $request, NormalUser $normalUser , User $User )
     {
         // return $normalUser->update($request->all());
+        // return $normalUser->where("email",$request->email)->update($request->all());
+
+        // return $request;
         return $normalUser->where("email",$request->email)->update([$request->except(['created_at','updated_at'])]);
    
     }
