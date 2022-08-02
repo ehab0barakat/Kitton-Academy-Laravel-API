@@ -37,7 +37,7 @@ class EventNotification extends Controller
 
             $teacher_id = Teacher::where("email",$request->user()->email)->first()->id ;
             $check =TeacherEventNotification::where("teacher_id",$teacher_id)->get() ;
-            $array_of_ids =TeacherEventNotification::where("teacher_id",$teacher_id)->get() ;
+            $array_of_ids = TeacherEventNotification::where("teacher_id",$teacher_id)->get()->sortByDesc('updated_at') ;
             $data = [] ;
         $count = 0 ;
         foreach ($check as $value) {
