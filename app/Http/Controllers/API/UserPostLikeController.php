@@ -23,7 +23,7 @@ class UserPostLikeController extends Controller
     {
 
         // $counter=count(UserPostLike::where("post_id", $request->post_id)->get());
-       
+
         // return UserPostLike::all();
         // $likeArr=($likes->toArray());
         // return $likeArr;
@@ -38,14 +38,14 @@ class UserPostLikeController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-       
+
         if(count(UserPostLike::where("user_id", $request->user_id)->where("post_id", $request->post_id)->get())==0)
         {
             return  UserPostLike::create($input)->save();
 
         }
-        
-        
+
+
     }
 
     /**
@@ -63,14 +63,10 @@ class UserPostLikeController extends Controller
         // return $likes;
          if(count( $likes)>0)
          {
-        
             return ['liked'=>true];
-            
          }
-
          else{
             return ['liked'=>false];
-
          }
     }
 
@@ -96,7 +92,7 @@ class UserPostLikeController extends Controller
     {
         $user = NormalUser::where("email",$request->user()->email)->first()->id ;
        return UserPostLike::where('post_id',$id)->where('user_id',$user)->delete();
-       
+
 
     }
 }
