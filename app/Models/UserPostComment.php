@@ -12,7 +12,7 @@ class UserPostComment extends Model
 
 
     protected $table = 'user_post_comments';
-     protected $fillable=['user_id','post_id','teacher_id','comment'];
+     protected $fillable=['name','user_id','post_id','comment'];
     // protected $guarded = [];
 
     public function post(){
