@@ -99,4 +99,5 @@ Route::get('classcats/{id}',['\App\Http\Controllers\API\EventCatsController',"cl
 Route::get('classcats/{id}',['\App\Http\Controllers\API\EventCatsController',"classcat"]);
 route::apiResource("myclasses","App\Http\Controllers\API\MyClassController");
 Route::post('myclasses/rate',["App\Http\Controllers\API\MyClassController",'myClassRate']);
+Route::get('myclasses/totalRate/{id}',["App\Http\Controllers\API\MyClassController",'totalRating']);
 Route::get('eventcat/{id}',['\App\Http\Controllers\API\EventCatsController',"eventcat"]);
