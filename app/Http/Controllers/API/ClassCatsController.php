@@ -72,5 +72,5 @@ class ClassCatsController extends Controller
     {
         return ClassCat::find($id)->delete();
     }
-   
+
 }

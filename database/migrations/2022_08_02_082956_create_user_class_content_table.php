@@ -13,13 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_post_likes', function (Blueprint $table) {
+        Schema::create('user_class_content', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger("post_id");
             $table->unsignedBigInteger("user_id");
             $table->foreign('user_id')->references('id')->on('normal_users')->onDelete('cascade');
-            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+
+            $table->unsignedBigInteger("video_id");
+            $table->foreign('video_id')->references('id')->on('class_content')->onDelete('cascade');
+
+            $table->unsignedBigInteger("class_id");
+            $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
+
+            $table->unsignedBigInteger("seen")->default(0);
 
             $table->timestamps();
         });
@@ -32,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_post_likes');
+        Schema::dropIfExists('user_class_content');
     }
 };

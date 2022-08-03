@@ -4,11 +4,19 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cllass;
+use App\Models\Teacher;
+use App\Models\ClassContent;
 use Illuminate\Http\Request;
 use Psy\Readline\Hoa\Console;
 
 class ClassController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum', ['except' => ["index" , "show"]]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +24,18 @@ class ClassController extends Controller
      */
     public function index()
     {
-        return  Cllass::all() ;
+        return  Cllass::where("isActive",1)->get() ;
+    }
+
+    public function teachers_classes(Request $request)
+    {
+
+        $teacher_id =Teacher::where("email", $request->user()->email)->first()->id;
+        if( $request->user()->role == 2 ){
+            return Cllass::where("teacher_id", $teacher_id)->get();
+        }
+
+
     }
 
     /**
@@ -72,5 +91,5 @@ class ClassController extends Controller
         return Cllass::find($id)->delete();
     }
 
-    
+
 }
