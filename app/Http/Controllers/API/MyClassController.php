@@ -100,12 +100,11 @@ class MyClassController extends Controller
     public function myClassRate(Request $request, myClass $myClass){
         $checker = myClass::select('id')->where('user_id',$request->user()->id)->where('class_id', $request->class_id)->exists();
         if ($checker == null){
-            return myClass::create(['user_id'=>$request->user()->id,'rate'=> $request->rate,
-        'class_id'=>$request->class_id]);
+            return myClass::create(['user_id'=>$request->user()->id,'rate'=> $request->rate,'class_id'=>$request->class_id]);
         } else {
     return myClass::where('user_id', $request->user()->id)
                 ->where('class_id', $request->class_id)
-                ->update(['rate' => $request->rate]);
+                ->update(['rate' => $request->rate ]);
 }
     }
 
@@ -127,16 +126,14 @@ class MyClassController extends Controller
                 }else{
                     return ["own" => false];
                 }
-            }else{
-                return ["own" => false];
             }
-        }else if($request->user()->role == 2){
+        } if($request->user()->role == 2){
             if( Cllass::find($id)->teacher_id == Teacher::where("email", $request->user()->email)->first()->id){
              return ["own" => true];
-             }else{
+            }else{
              return ["own" => false];
             }
-         }elseif($request->user()->role == 3){
+        } if($request->user()->role == 3){
             return ["own" => true];
         }else{
             return ["valid" =>false];
@@ -164,16 +161,16 @@ class MyClassController extends Controller
                     return ["own" => true];
                 }else{
                     return ["own" => false];
-                }
-            }else if($request->user()->role == 2){
+                }}
+            elseif($request->user()->role == 2){
                if( Cllass::find($class_id)->teacher_id == Teacher::where("email", $request->user()->email)->first()->id){
                 return ["own" => true];
                 }else{
                 return ["own" => false];
-               }
-            }elseif($request->user()->role == 3){
-            return ["own" => true];
-        }else{
+               }}
+            elseif($request->user()->role == 3){
+                return ["own" => true];}
+        else{
             return ["valid" =>false];
         }
     }

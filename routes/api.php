@@ -47,11 +47,9 @@ Route::group([
 });
 
 
-
 route::apiResource("normaluser","App\Http\Controllers\API\NormalUserController");
 route::apiResource("eventcats","App\Http\Controllers\API\EventCatsController");
 route::apiResource("teacher","App\Http\Controllers\API\TeacherController");
-route::apiResource("post","App\Http\Controllers\API\PostController");
 route::apiResource("comment","App\Http\Controllers\API\UserPostCommentController");
 route::apiResource("teachercomment","App\Http\Controllers\API\TeacherPostCommentController");
 route::apiResource("likes","App\Http\Controllers\API\UserPostLikeController");
@@ -61,11 +59,15 @@ route::apiResource("likes","App\Http\Controllers\API\UserPostLikeController");
 // route::post('file','PostController@file');
 
 
-
-
 // route::apiResource("auth","App\Http\Controllers\Auth\AuthController");
 
 
+Route::post('class-notification/create',['\App\Http\Controllers\API\ClassController',"notify_teacher"]);
+Route::get('class-notification/show',['\App\Http\Controllers\API\ClassController',"notify_teacher_show"]);
+Route::get('class-notification/update/{id}',['\App\Http\Controllers\API\ClassController',"notify_teacher_update"]);
+
+Route::put('classes/activate/{id}',['\App\Http\Controllers\API\ClassController',"make_class_active"]);
+Route::get('classes/allclasses',['\App\Http\Controllers\API\ClassController',"AllClasses"]);
 route::apiResource("classes","App\Http\Controllers\API\ClassController");
 Route::get('teachers-classes',['\App\Http\Controllers\API\ClassController',"teachers_classes"]);
 
@@ -79,10 +81,8 @@ Route::group([
 
     Route::post('login',['\App\Http\Controllers\Auth\AuthController',"login"]);
     Route::post('logout',['\App\Http\Controllers\Auth\AuthController',"logout"]);
-
     Route::post('refresh',['\App\Http\Controllers\Auth\AuthController',"refresh"]);
     Route::get('me',['\App\Http\Controllers\Auth\AuthController',"me"]);
-
     Route::post('signupuser',['\App\Http\Controllers\Auth\AuthController',"signupuser"]);
     Route::post('signupteacher',['\App\Http\Controllers\Auth\AuthController',"signupteacher"]);
 });
@@ -118,9 +118,17 @@ Route::group([
     'middleware' => 'api',
 ], function () {
     Route::put('update-content/{id}',['\App\Http\Controllers\Api\UserClassContentController',"update"]); //id for video
-
     Route::get('get-user-videos/{id}',['\App\Http\Controllers\Api\UserClassContentController',"check_videos_seen"]); //id for video
 });
 
 
 
+
+Route::post('post-notification/create',['\App\Http\Controllers\API\PostController',"notify_teacher"]);
+Route::get('post-notification/show',['\App\Http\Controllers\API\PostController',"notify_teacher_show"]);
+Route::get('post-notification/update/{id}',['\App\Http\Controllers\API\PostController',"notify_teacher_update"]);
+Route::put('post/activate/{id}',['\App\Http\Controllers\API\PostController',"make_post_active"]);
+
+Route::get('/teacher-posts',['\App\Http\Controllers\Api\PostController',"all_teacher_posts"]);
+Route::get('/active-posts',['\App\Http\Controllers\Api\PostController',"show_active_posts"]);
+route::apiResource("post","App\Http\Controllers\API\PostController");

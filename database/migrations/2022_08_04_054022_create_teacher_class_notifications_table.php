@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('class_content', function (Blueprint $table) {
+        Schema::create('teacher_class_notification', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
-            $table->string("description");
-            $table->string("link");
-            $table->string("image");
-
             $table->unsignedBigInteger("class_id");
             $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
+            $table->unsignedBigInteger("teacher_id");
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
+            $table->boolean("check")->default(0);
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('class_content');
+        Schema::dropIfExists('teacher_class_notifications');
     }
 };
