@@ -90,7 +90,7 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post , $id)
+    public function update(Request $request, $id)
     {
         $teacher_id = Teacher::where("email", $request->user()->email)->first()->id;
         return Post::find($id)->update(["title" => $request->title ,
