@@ -16,6 +16,8 @@ class myClass extends Model
         'user_id',
         'class_id',
         'rate',
+        'user_id',
+        'comment'
     ];
     public function class()
     {

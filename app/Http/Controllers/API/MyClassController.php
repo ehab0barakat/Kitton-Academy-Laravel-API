@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\myClass;
 use App\Models\Cllass;
 use App\Models\NormalUser;
+use App\Models\ClassContent;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Type\Decimal;
 
@@ -15,7 +17,7 @@ class MyClassController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum');
+        $this->middleware('auth:sanctum', ["except" => [] ]);
     }
     /**
      * Display a listing of the resource.
@@ -37,7 +39,7 @@ class MyClassController extends Controller
      */
     public function store(Request $request)
     {
-        return myClass::create($request->all())->save() ;
+
         // {
 
         //     $fields = array();
@@ -70,8 +72,10 @@ class MyClassController extends Controller
      */
     public function show(myClass $myClass, $id)
     {
+
     if (Auth::check()) {
         return Cllass::rightJoin('myclass', 'myclass.class_id', '=', 'classes.id')->where('myclass.user_id', '=', $id)->select('classes.*')->get();
+
     }
 }
 
@@ -131,4 +135,82 @@ class MyClassController extends Controller
         // $percent = (($ratings->count / 100) * $total);
         //  return $percent;
     }
+
+
+
+
+
+    public function class_owner_check (Request $request , $id){
+        $class_exists = Cllass::find($id) ;
+        if($class_exists ){
+            if($request->user()->role == 1 ){
+                $user_id =  NormalUser::where("email", $request->user()->email)->first()->id ;
+                $class_id = $id;
+                $rows = myClass::where("class_id", $class_id)
+                                ->where("user_id", $user_id)
+                                ->get();
+                if(count($rows) > 0){
+                    return ["own" => true];
+                }else{
+                    return ["own" => false];
+                }
+            }else{
+                return ["own" => false];
+            }
+        }else if($request->user()->role == 2){
+            if( Cllass::find($id)->teacher_id == Teacher::where("email", $request->user()->email)->first()->id){
+             return ["own" => true];
+             }else{
+             return ["own" => false];
+            }
+         }elseif($request->user()->role == 3){
+            return ["own" => true];
+        }else{
+            return ["valid" =>false];
+        }
+
+    }
+
+
+
+
+
+
+    public function video_owner_check (Request $request , $id){
+        $video_exists = ClassContent::find($id) ;
+        if($video_exists){
+            $class_id = ClassContent::find($id)->class_id;
+            if($request->user()->role == 1){
+
+                $user_id = NormalUser::where("email", $request->user()->email)->first()->id ;
+                $rows = myClass::where("class_id", $class_id)
+                                ->where("user_id", $user_id)
+                                ->get();
+                if(count($rows) > 0){
+                    return ["own" => true];
+                }else{
+                    return ["own" => false];
+                }
+            }else if($request->user()->role == 2){
+               if( Cllass::find($class_id)->teacher_id == Teacher::where("email", $request->user()->email)->first()->id){
+                return ["own" => true];
+                }else{
+                return ["own" => false];
+               }
+            }elseif($request->user()->role == 3){
+            return ["own" => true];
+        }else{
+            return ["valid" =>false];
+        }
+    }
+
+
+
+
+
+
+
+
+}
+
 }
