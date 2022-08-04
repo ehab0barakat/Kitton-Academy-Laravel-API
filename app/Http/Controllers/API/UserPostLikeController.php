@@ -22,7 +22,6 @@ class UserPostLikeController extends Controller
     public function index(Request $request)
     {
 
-        // $counter=count(UserPostLike::where("post_id", $request->post_id)->get());
 
         // return UserPostLike::all();
         // $likeArr=($likes->toArray());
@@ -59,7 +58,7 @@ class UserPostLikeController extends Controller
         // return $userPostLike;
     //    return($id);
        $user = NormalUser::where("email",$request->user()->email)->first()->id ;
-        $likes = UserPostLike::where('post_id',$id)->where('user_id',$user)->get();
+      $likes = UserPostLike::where('post_id',$id)->where('user_id',$user)->get();
         // return $likes;
          if(count( $likes)>0)
          {
@@ -93,6 +92,15 @@ class UserPostLikeController extends Controller
         $user = NormalUser::where("email",$request->user()->email)->first()->id ;
        return UserPostLike::where('post_id',$id)->where('user_id',$user)->delete();
 
+
+    }
+
+
+
+     public function likes_count (Request $request ,$id)
+    {
+      
+        return count(UserPostLike::where("post_id",$id)->get());
 
     }
 }

@@ -70,4 +70,21 @@ class UserPostCommentController extends Controller
     {
         return $comment->delete();
     }
+
+   
+//    public function comments($id){
+
+//     // return $id;
+//     $comments = UserPostComment::select(
+//         "teacher_post_comments.comment", 
+//         "user_post_comments.comment",
+        
+//     )
+//     ->join("teacher_post_comments", "$id", "=", "user_post_comments.$id")
+//     ->get()
+//     ->toArray();
+
+//     return $comments;
+//    }
+   
 }
