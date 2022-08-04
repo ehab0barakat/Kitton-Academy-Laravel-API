@@ -63,7 +63,7 @@ route::apiResource("comment","App\Http\Controllers\API\UserPostCommentController
 route::apiResource("teachercomment","App\Http\Controllers\API\TeacherPostCommentController");
 route::apiResource("likes","App\Http\Controllers\API\UserPostLikeController");
 Route::get('likes/countlikes/{id}',['App\Http\Controllers\API\UserPostLikeController',"likes_count"]); 
-Route::get('comment/join/{id}',['App\Http\Controllers\API\UserPostCommentController',"comments"]); 
+// Route::get('comment/join/{id}',['App\Http\Controllers\API\UserPostCommentController',"comments"]); 
 
 
 
