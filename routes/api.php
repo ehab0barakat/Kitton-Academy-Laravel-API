@@ -22,8 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-
 Route::get('event/userscount/{id}',['\App\Http\Controllers\API\EventController',"users_Count"]); // how many users will go the event
+Route::get('event/single-event/{id}',['\App\Http\Controllers\API\EventController',"single"]); // get event details for guest
 Route::get('event/nonactive',['App\Http\Controllers\API\EventController',"events_nonactive"]); // non active event
 Route::put('event/change/{id}',['\App\Http\Controllers\API\EventController',"change_state"]); // change state active non active
 Route::get('event/active',['\App\Http\Controllers\API\EventController',"events_active"]); // active event
@@ -34,30 +34,23 @@ Route::post('event/inroll_add',['\App\Http\Controllers\API\EventController',"eve
 Route::delete('event/inroll_destroy',['\App\Http\Controllers\API\EventController',"event_outroll"]); // user is out rolling in event
 Route::get('event/teacherbyid/{id}',['\App\Http\Controllers\API\EventController',"certian_teacher"]);
 Route::post('event/search_for_teacher_events',['\App\Http\Controllers\API\EventController',"search_for_teacher_events"]);
-
 route::apiResource("event","App\Http\Controllers\API\EventController");
 
 
 Route::group([
-
     'middleware' => 'api',
     'prefix' => 'event-notification'
-
 ], function () {
     Route::post('create',['\App\Http\Controllers\Api\EventNotification',"create"]);
     Route::get('show',['\App\Http\Controllers\Api\EventNotification',"show"]);
     Route::get('update/{id}',['\App\Http\Controllers\Api\EventNotification',"update"]);
-
 });
 
 
 
 route::apiResource("normaluser","App\Http\Controllers\API\NormalUserController");
-
 route::apiResource("eventcats","App\Http\Controllers\API\EventCatsController");
-
 route::apiResource("teacher","App\Http\Controllers\API\TeacherController");
-
 route::apiResource("post","App\Http\Controllers\API\PostController");
 route::apiResource("comment","App\Http\Controllers\API\UserPostCommentController");
 route::apiResource("teachercomment","App\Http\Controllers\API\TeacherPostCommentController");
@@ -79,6 +72,7 @@ Route::get('likes/countlikes/{id}',['App\Http\Controllers\API\UserPostLikeContro
 
 
 route::apiResource("classes","App\Http\Controllers\API\ClassController");
+Route::get('teachers-classes',['\App\Http\Controllers\API\ClassController',"teachers_classes"]);
 
 
 Route::group([
@@ -105,3 +99,33 @@ Route::get('classcats/{id}',['\App\Http\Controllers\API\EventCatsController',"cl
 route::apiResource("myclasses","App\Http\Controllers\API\MyClassController");
 Route::post('myclasses/rate',["App\Http\Controllers\API\MyClassController",'myClassRate']);
 Route::get('eventcat/{id}',['\App\Http\Controllers\API\EventCatsController',"eventcat"]);
+
+Route::get('myclasses/user-video-owner-check/{id}',["App\Http\Controllers\API\MyClassController",'video_owner_check']); //check if user have purshased the cousre usung video id ////
+Route::get('myclasses/user-class-owner-check/{id}',["App\Http\Controllers\API\MyClassController",'class_owner_check']); //check if user have purshased the cousre usung video id ////
+
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'class-content'
+], function () {
+    Route::get('all-videos-class/{id}',['\App\Http\Controllers\Api\ClassContentController',"index"]); //all videos for this class
+    Route::get('all-videos-class-by_vid-id/{id}',['\App\Http\Controllers\Api\ClassContentController',"indox"]); //all videos for this class
+    Route::post('add-on-class',['\App\Http\Controllers\Api\ClassContentController',"create"]); //id for class
+    Route::get('show-video/{id}',['\App\Http\Controllers\Api\ClassContentController',"show"]); //id for video
+    Route::put('update-video/{id}',['\App\Http\Controllers\Api\ClassContentController',"update"]); //id for video
+    Route::delete('delete-video/{id}',['\App\Http\Controllers\Api\ClassContentController',"delete"]); //id for video
+    Route::get('/video/{id}',['\App\Http\Controllers\Api\ClassContentController',"check_video_permission"]); //ckeck of teacher video permission
+    Route::get('/ccllaass/{id}',['\App\Http\Controllers\Api\ClassContentController',"check_class_permission"]); //ckeck of teacher class permission
+});
+
+
+Route::group([
+    'middleware' => 'api',
+], function () {
+    Route::put('update-content/{id}',['\App\Http\Controllers\Api\UserClassContentController',"update"]); //id for video
+
+    Route::get('get-user-videos/{id}',['\App\Http\Controllers\Api\UserClassContentController',"check_videos_seen"]); //id for video
+});
+
+
+

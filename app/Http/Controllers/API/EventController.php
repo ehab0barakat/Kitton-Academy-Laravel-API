@@ -14,7 +14,7 @@ class EventController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:sanctum', ['except' => ['events_active'  , "certian_teacher"]]);
+        $this->middleware('auth:sanctum', ['except' => ['events_active'  , "certian_teacher", "users_Count" ,"single" ]]);
     }
 
     /**
@@ -56,6 +56,15 @@ class EventController extends Controller
         }else{
             return ["id" => 0 ] ;
         }
+    }
+
+    public function single(Request $request ,Teacher $teacher , Event $event , $id)
+    {
+        if($event->find($id)->isActive == 1){
+             return $event->find($id) ;
+            }else{
+                return ["valid" => false] ;
+            }
     }
 
     /**
