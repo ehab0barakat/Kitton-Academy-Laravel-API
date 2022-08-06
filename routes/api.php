@@ -94,11 +94,14 @@ Route::get('classcats/{id}',['\App\Http\Controllers\API\EventCatsController',"cl
 Route::get('classcats/{id}',['\App\Http\Controllers\API\EventCatsController',"classcat"]);
 route::apiResource("myclasses","App\Http\Controllers\API\MyClassController");
 Route::post('myclasses/rate',["App\Http\Controllers\API\MyClassController",'myClassRate']);
+Route::get('myclasses/totalRate/{id}',["App\Http\Controllers\API\MyClassController",'totalRating']);
 Route::get('eventcat/{id}',['\App\Http\Controllers\API\EventCatsController',"eventcat"]);
 
 Route::get('myclasses/user-video-owner-check/{id}',["App\Http\Controllers\API\MyClassController",'video_owner_check']); //check if user have purshased the cousre usung video id ////
 Route::get('myclasses/user-class-owner-check/{id}',["App\Http\Controllers\API\MyClassController",'class_owner_check']); //check if user have purshased the cousre usung video id ////
-
+Route::post('class/comment',["App\Http\Controllers\API\classcommentcontroller",'class_user_comment']); //check if user have purshased the cousre usung video id ////
+route::apiResource("classComment","App\Http\Controllers\API\classcommentcontroller"); //check if user have purshased the cousre usung video id ////
+Route::get('classComment/{id}',['App\Http\Controllers\API\classcommentcontroller',"comments_count"]);
 
 Route::group([
     'middleware' => 'api',

@@ -11,6 +11,7 @@ use App\Models\NormalUser;
 use App\Models\ClassContent;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Type\Decimal;
 
 class MyClassController extends Controller
 {
@@ -26,7 +27,7 @@ class MyClassController extends Controller
     public function index()
     {
 //
-}
+    }
 
 
 
@@ -68,10 +69,14 @@ class MyClassController extends Controller
      * @param  \App\Models\myClass  $myClass
      * @return \Illuminate\Http\Response
      */
-    public function show( myClass $myClass, $id)
+    public function show(myClass $myClass, $id)
     {
-     return Cllass::rightJoin('myclass', 'myclass.class_id', '=', 'classes.id')->where('myclass.user_id','=',$id)->select('classes.*')->get();
+
+    if (Auth::check()) {
+        return Cllass::rightJoin('myclass', 'myclass.class_id', '=', 'classes.id')->where('myclass.user_id', '=', $id)->select('classes.*')->get();
+
     }
+}
 
     /**
      * Update the specified resource in storage.
@@ -91,19 +96,44 @@ class MyClassController extends Controller
      * @param  \App\Models\myClass  $myClass
      * @return \Illuminate\Http\Response
      */
+
+     
     public function destroy(myClass $myClass)
     {
         //
     }
-    public function myClassRate(Request $request, myClass $myClass){
-        $checker = myClass::select('id')->where('user_id',$request->user()->id)->where('class_id', $request->class_id)->exists();
-        if ($checker == null){
-            return myClass::create(['user_id'=>$request->user()->id,'rate'=> $request->rate,'class_id'=>$request->class_id]);
+
+
+
+
+
+    public function myClassRate(Request $request, myClass $myClass)
+    {
+        $checker = myClass::select('id')->where('user_id', $request->user()->id)->where('class_id', $request->class_id)->exists();
+        if ($checker == null) {
+            return myClass::create(['user_id'=>$request->user()->id,'rate'=> $request->rate,
+        'class_id'=>$request->class_id]);
         } else {
-    return myClass::where('user_id', $request->user()->id)
+            return myClass::where('user_id', $request->user()->id)
                 ->where('class_id', $request->class_id)
-                ->update(['rate' => $request->rate ]);
-}
+                ->update(['rate' => $request->rate]);
+        }
+    }
+
+
+
+
+
+    public function totalRating(myClass $myClass, $id)
+    {
+        $count=myClass::where('class_id', $id)->count();
+        $total=0;
+        $rates=myClass::select('rate')->where('class_id', $id)->get();
+        foreach ($rates as $rate) {
+            $total+=(($rate->rate/$count));
+
+        }
+        return round($total);
     }
 
 
@@ -138,7 +168,6 @@ class MyClassController extends Controller
         }
 
     }
-
 
 
 
@@ -181,4 +210,5 @@ class MyClassController extends Controller
 
 
 }
+
 }
