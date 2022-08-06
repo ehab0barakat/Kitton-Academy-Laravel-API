@@ -101,15 +101,23 @@ class MyClassController extends Controller
     {
         //
     }
+<<<<<<< HEAD
     public function myClassRate(Request $request, myClass $myClass)
     {
         $checker = myClass::select('id')->where('user_id', $request->user()->id)->where('class_id', $request->class_id)->exists();
         if ($checker == null) {
             return myClass::create(['user_id'=>$request->user()->id,'rate'=> $request->rate,
         'class_id'=>$request->class_id]);
+=======
+    public function myClassRate(Request $request, myClass $myClass){
+        $checker = myClass::select('id')->where('user_id',$request->user()->id)->where('class_id', $request->class_id)->exists();
+        if ($checker == null){
+            return myClass::create(['user_id'=>$request->user()->id,'rate'=> $request->rate,'class_id'=>$request->class_id]);
+>>>>>>> 80fe958b674a1238cd07a197eaeed46a8494d255
         } else {
             return myClass::where('user_id', $request->user()->id)
                 ->where('class_id', $request->class_id)
+<<<<<<< HEAD
                 ->update(['rate' => $request->rate]);
         }
     }
@@ -134,6 +142,10 @@ class MyClassController extends Controller
         //  return
         // $percent = (($ratings->count / 100) * $total);
         //  return $percent;
+=======
+                ->update(['rate' => $request->rate ]);
+}
+>>>>>>> 80fe958b674a1238cd07a197eaeed46a8494d255
     }
 
 
@@ -154,16 +166,14 @@ class MyClassController extends Controller
                 }else{
                     return ["own" => false];
                 }
-            }else{
-                return ["own" => false];
             }
-        }else if($request->user()->role == 2){
+        } if($request->user()->role == 2){
             if( Cllass::find($id)->teacher_id == Teacher::where("email", $request->user()->email)->first()->id){
              return ["own" => true];
-             }else{
+            }else{
              return ["own" => false];
             }
-         }elseif($request->user()->role == 3){
+        } if($request->user()->role == 3){
             return ["own" => true];
         }else{
             return ["valid" =>false];
@@ -190,16 +200,16 @@ class MyClassController extends Controller
                     return ["own" => true];
                 }else{
                     return ["own" => false];
-                }
-            }else if($request->user()->role == 2){
+                }}
+            elseif($request->user()->role == 2){
                if( Cllass::find($class_id)->teacher_id == Teacher::where("email", $request->user()->email)->first()->id){
                 return ["own" => true];
                 }else{
                 return ["own" => false];
-               }
-            }elseif($request->user()->role == 3){
-            return ["own" => true];
-        }else{
+               }}
+            elseif($request->user()->role == 3){
+                return ["own" => true];}
+        else{
             return ["valid" =>false];
         }
     }
