@@ -36,32 +36,30 @@ class MyClassController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request , myClass $myclass)
     {
-        {
-
-            $fields = array();
-            foreach ($request->all() as $key => $value) {
-                $fields[$key] = $value;
-            }
-            try {
-
-                $data = myClass::insertGetId($fields);
-                $data = myClass::find($data);
-
-                $response = array(
-                    'data' => $data,
-                );
-                return response()->json($response);
-            } catch (\Exception $e) {
-                $response = array(
-                    'status' => 'fail',
-                    'error' => $e->getMessage()
-                );
-                return response()->json($response, 400);
-            }
-        }
-
+        // {
+            // $fields = array();
+            // foreach ($request->all() as $key => $value) {
+            //     $fields[$key] = $value;
+            // }
+            // try {
+            //     $data = myClass::insertGetId($fields);
+            //     $data = myClass::find($data);
+            //     $response = array(
+            //         'data' => $data,
+            //     );
+            //     return response()->json($response);
+            // } catch (\Exception $e) {
+            //     $response = array(
+            //         'status' => 'fail',
+            //         'error' => $e->getMessage()
+            //     );
+            //     return response()->json($response, 400);
+            // }
+        // }
+         $user_id = NormalUser::where("email", $request->user()->email)->first()->id ;
+        return $myclass->create(["user_id" => $user_id , "class_id" => $request->class_id]) ;
     }
 
     /**
@@ -115,7 +113,7 @@ class MyClassController extends Controller
     public function class_owner_check (Request $request , $id){
         $class_exists = Cllass::find($id) ;
         if($class_exists ){
-            if($request->user()->role == 1 ){
+            if($request->user()->role == 1 && $class_exists->isActive == 1){
                 $user_id =  NormalUser::where("email", $request->user()->email)->first()->id ;
                 $class_id = $id;
                 $rows = myClass::where("class_id", $class_id)
@@ -127,13 +125,13 @@ class MyClassController extends Controller
                     return ["own" => false];
                 }
             }
-        } if($request->user()->role == 2){
+        } if($request->user()->role == 2  && $class_exists->isActive == 1){
             if( Cllass::find($id)->teacher_id == Teacher::where("email", $request->user()->email)->first()->id){
              return ["own" => true];
             }else{
              return ["own" => false];
             }
-        } if($request->user()->role == 3){
+        } if($request->user()->role == 3 ){
             return ["own" => true];
         }else{
             return ["valid" =>false];
@@ -151,7 +149,7 @@ class MyClassController extends Controller
         $video_exists = ClassContent::find($id) ;
         if($video_exists){
             $class_id = ClassContent::find($id)->class_id;
-            if($request->user()->role == 1){
+            if($request->user()->role == 1&& Cllass::find($class_id)->isActive == 1){
 
                 $user_id = NormalUser::where("email", $request->user()->email)->first()->id ;
                 $rows = myClass::where("class_id", $class_id)
@@ -162,13 +160,13 @@ class MyClassController extends Controller
                 }else{
                     return ["own" => false];
                 }}
-            elseif($request->user()->role == 2){
+            elseif($request->user()->role == 2 && Cllass::find($class_id)->isActive == 1){
                if( Cllass::find($class_id)->teacher_id == Teacher::where("email", $request->user()->email)->first()->id){
                 return ["own" => true];
                 }else{
                 return ["own" => false];
                }}
-            elseif($request->user()->role == 3){
+            elseif($request->user()->role == 3 ){
                 return ["own" => true];}
         else{
             return ["valid" =>false];

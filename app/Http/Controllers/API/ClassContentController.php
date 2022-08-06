@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Models\Cllass;
 use App\Models\Teacher;
+use App\Models\UserClassContent;
 use App\Http\Controllers\Controller;
 use App\Models\ClassContent;
 use Illuminate\Http\Request;
@@ -82,7 +83,7 @@ class ClassContentController extends Controller
         }
 
     }
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -103,7 +104,13 @@ class ClassContentController extends Controller
      */
     public function show(ClassContent $classContent , $id)
     {
-        return ClassContent::find($id);
+        $video_data  = ClassContent::find($id);
+        $views = 0 ;
+        $users_saw_video  = UserClassContent::where("video_id" , $id)->get();
+        foreach ($users_saw_video as $user) {
+            $views += $user->seen ;
+        }
+        return ["data" => $video_data, "views" => $views] ;
     }
 
     /**

@@ -47,14 +47,14 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request ,Teacher $teacher , Event $event)
+    public function show(Request $request  ,$id)
     {
-        if($request->user()->role == 3 ||
-           $event->isActive == 1 ||
-           Teacher::where("email", $request->user()->email)->first()->id == $event->teacher_id){
-             return $event ;
-        }else{
-            return ["id" => 0 ] ;
+        if(Event::find($id)->isActive == 1 ||
+           $request->user()->role == 3 ||
+           Teacher::where("email", $request->user()->email)->first()->id == Event::find($id)->teacher_id){
+            return Event::find($id) ;
+          }else{
+            return ["valid" => false] ;
         }
     }
 

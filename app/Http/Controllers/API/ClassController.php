@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cllass;
+use App\Models\MyClass;
 use App\Models\Teacher;
 use App\Models\TeacherClassNotification;
 use App\Models\ClassContent;
@@ -85,12 +86,7 @@ class ClassController extends Controller
      */
     public function update(Request $request, Cllass $cllass,$id)
     {
-
         return Cllass::find($id)->update($request->all());
-
-
-
-
     }
 
     /**
@@ -99,9 +95,28 @@ class ClassController extends Controller
      * @param  \App\Models\Cllass  $cllass
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cllass $cllass,$id)
+    public function destroy( Request $request, Cllass $cllass,$id)
     {
-        return Cllass::find($id)->delete();
+        $admin = $request->user()->role == 3 ;
+        $creator = $cllass->teacher_id == Teacher::where("email", $request->user()->email)->first()->id ;
+        $number = count(MyClass::where("class_id" , $id)->get());
+
+        if($creator && $number < 0  || $admin ){
+            return Cllass::find($id)->delete();
+        }else{
+            return [ "canDelete" => false ] ;
+        }
+    }
+
+
+    public function check_destroy(Cllass $cllass,$id)
+    {
+        $number = count(MyClass::where("class_id" , $id)->get());
+        if($number > 0){
+            return ["valid" => false , "message" => "You can`t Delete this class " , "id" => $id];
+        }else{
+            return ["valid" => true , "message" => ""];
+        }
     }
 
 

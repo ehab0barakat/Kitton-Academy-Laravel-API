@@ -66,6 +66,7 @@ Route::post('class-notification/create',['\App\Http\Controllers\API\ClassControl
 Route::get('class-notification/show',['\App\Http\Controllers\API\ClassController',"notify_teacher_show"]);
 Route::get('class-notification/update/{id}',['\App\Http\Controllers\API\ClassController',"notify_teacher_update"]);
 
+Route::delete('classes/check-destroy/{id}',['\App\Http\Controllers\API\ClassController',"check_destroy"]);
 Route::put('classes/activate/{id}',['\App\Http\Controllers\API\ClassController',"make_class_active"]);
 Route::get('classes/allclasses',['\App\Http\Controllers\API\ClassController',"AllClasses"]);
 route::apiResource("classes","App\Http\Controllers\API\ClassController");
