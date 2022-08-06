@@ -61,8 +61,9 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Post $post )
     {
+        
         return $post;
     }
     public function all_teacher_posts(Post $post,Request $request )

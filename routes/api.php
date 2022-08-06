@@ -53,6 +53,11 @@ route::apiResource("teacher","App\Http\Controllers\API\TeacherController");
 route::apiResource("comment","App\Http\Controllers\API\UserPostCommentController");
 route::apiResource("teachercomment","App\Http\Controllers\API\TeacherPostCommentController");
 route::apiResource("likes","App\Http\Controllers\API\UserPostLikeController");
+Route::get('likes/countlikes/{id}',['App\Http\Controllers\API\UserPostLikeController',"likes_count"]); 
+// Route::get('comment/join/{id}',['App\Http\Controllers\API\UserPostCommentController',"comments"]); 
+
+
+
 
 
 
@@ -85,7 +90,9 @@ Route::group([
     Route::post('refresh',['\App\Http\Controllers\Auth\AuthController',"refresh"]);
     Route::get('me',['\App\Http\Controllers\Auth\AuthController',"me"]);
     Route::post('signupuser',['\App\Http\Controllers\Auth\AuthController',"signupuser"]);
+   
     Route::post('signupteacher',['\App\Http\Controllers\Auth\AuthController',"signupteacher"]);
+
 });
 
 

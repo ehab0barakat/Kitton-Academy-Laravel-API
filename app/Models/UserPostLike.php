@@ -12,8 +12,9 @@ class UserPostLike extends Model
 
 
     protected $table = 'user_post_likes';
+    protected $fillable=['user_id','post_id'];
 
-    protected $guarded = [];
+    // protected $guarded = [];
 
 
 

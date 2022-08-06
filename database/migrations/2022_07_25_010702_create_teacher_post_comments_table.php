@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('teacher_post_comments', function (Blueprint $table) {
             $table->id();
-
+            $table->string('name')->before('teacher_id')->nullable();
             $table->unsignedBigInteger("teacher_id");
             $table->unsignedBigInteger("post_id");
             $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');

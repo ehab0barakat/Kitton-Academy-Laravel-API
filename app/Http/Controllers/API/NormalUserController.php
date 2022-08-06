@@ -100,9 +100,11 @@ class NormalUserController extends Controller
      * @param  \App\Models\NormalUser  $normalUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NormalUser $normalUser)
+    public function destroy( Request $request, NormalUser $normalUser,$id)
     {
-        return $normalUser->delete();
+        
+     User::where('email',$request->user()->email)->first()->delete();
+      $normalUser::find($id)->delete();
     }
 }
 

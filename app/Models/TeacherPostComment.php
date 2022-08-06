@@ -11,7 +11,7 @@ class TeacherPostComment extends Model
 
 
     protected $table = 'teacher_post_comments';
-    protected $fillable=['user_id','post_id','teacher_id','comment'];
+    protected $fillable=['name','post_id','teacher_id','comment'];
 
 
 
