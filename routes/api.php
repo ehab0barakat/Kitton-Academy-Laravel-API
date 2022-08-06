@@ -89,7 +89,9 @@ Route::group([
     Route::get('me',['\App\Http\Controllers\Auth\AuthController',"me"]);
 
     Route::post('signupuser',['\App\Http\Controllers\Auth\AuthController',"signupuser"]);
+   
     Route::post('signupteacher',['\App\Http\Controllers\Auth\AuthController',"signupteacher"]);
+
 });
 
 
