@@ -40,7 +40,7 @@ class UserClassContentController extends Controller
     {
         if($request->user()->role == 1){
             $user_id = NormalUser::where("email", $request->user()->email)->first()->id ;
-            $class_id = ClassContent::find($id)->class_id ;
+            $class_id = ClassContent::find($id)->class_id ; 
             return UserClassContent::where("user_id", $user_id)->where("class_id",$class_id )->get();
         }
 

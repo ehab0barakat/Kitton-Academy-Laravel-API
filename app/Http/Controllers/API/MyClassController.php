@@ -39,27 +39,7 @@ class MyClassController extends Controller
      */
     public function store(Request $request , myClass $myclass)
     {
-        // {
-            // $fields = array();
-            // foreach ($request->all() as $key => $value) {
-            //     $fields[$key] = $value;
-            // }
-            // try {
-            //     $data = myClass::insertGetId($fields);
-            //     $data = myClass::find($data);
-            //     $response = array(
-            //         'data' => $data,
-            //     );
-            //     return response()->json($response);
-            // } catch (\Exception $e) {
-            //     $response = array(
-            //         'status' => 'fail',
-            //         'error' => $e->getMessage()
-            //     );
-            //     return response()->json($response, 400);
-            // }
-        // }
-         $user_id = NormalUser::where("email", $request->user()->email)->first()->id ;
+        $user_id = NormalUser::where("email", $request->user()->email)->first()->id ;
         return $myclass->create(["user_id" => $user_id , "class_id" => $request->class_id]) ;
     }
 
@@ -97,7 +77,7 @@ class MyClassController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     
+
     public function destroy(myClass $myClass)
     {
         //

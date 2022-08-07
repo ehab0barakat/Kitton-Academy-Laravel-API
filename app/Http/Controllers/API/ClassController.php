@@ -154,9 +154,6 @@ class ClassController extends Controller
     }
     }
 
-
-
-
     public function notify_teacher_update (Request $request , $id ){
         if( $request->user()->role == 2 ){
             TeacherClassNotification::find($id)->update(["check" => 1]);
